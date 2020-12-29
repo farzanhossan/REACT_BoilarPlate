@@ -1,11 +1,19 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { registerAction } from "../../@redux/register/register.actions"
+import { roleAction } from "../../@redux/role/role.actions"
 
 
-const Register = ({payload, registerAction, token}: any) => {
+const Register = ({payload, registerAction, roleAction, token}: any) => {
+
+	useEffect(() => {
+		roleAction(token)
+	}, [])
+
 	const items: any = []
-	payload?.roles.map((role: any) => {
+	console.log('payload?.roles?', payload.roles);
+	console.log('tiken', token);
+	payload?.roles?.map((role: any) => {
 		items.push(<option value={role.id}>{role.roleName}</option>)
 	})
 
@@ -63,4 +71,4 @@ const mapStateToProps = (state: any) => {
 	}
 }
 
-export default connect(mapStateToProps, {registerAction})(Register)
+export default connect(mapStateToProps, {registerAction, roleAction})(Register)

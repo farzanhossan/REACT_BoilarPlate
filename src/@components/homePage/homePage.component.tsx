@@ -9,16 +9,20 @@
 
 import React from "react"
 import { connect } from "react-redux"
-import { roleAction } from "../../@redux/role/role.actions"
+import { logoutAction } from "../../@redux/logout/logout.actions"
 import Sidebar from "../sidebar/sidebar.component"
 
-const HomePage = ({payload, roleAction, history}: any) => {
+const HomePage = ({payload, history, logoutAction}: any) => {
 
 	const registerClick = (e: any) => {
 		e.preventDefault()
-		console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', payload.token);
-		roleAction(payload.token)
 		history.push("/register")
+	}
+
+	const logoutClick = (e: any) => {
+		e.preventDefault()
+		logoutAction()
+		history.push("/")
 	}
 	return (
 		<>
@@ -28,6 +32,7 @@ const HomePage = ({payload, roleAction, history}: any) => {
 			<h1>Hi</h1>
 			For New User Create
 			<button type="button" onClick={registerClick}>Register</button>
+			<button type="button" onClick={logoutClick}>Logout</button>
 		</div>
 		</>
 	)
@@ -40,4 +45,4 @@ const mapStateToProps = (state: any) => {
 	}
 }
 
-export default connect(mapStateToProps,{roleAction})(HomePage)
+export default connect(mapStateToProps,{logoutAction})(HomePage)

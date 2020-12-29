@@ -1,36 +1,29 @@
-import { persistReducer, persistStore } from "redux-persist"
-
 import { combineReducers } from "redux"
-import storage from "redux-persist/lib/storage"
-import todoReducer from "./todo/todo.reducer"
 import loginReducer from "./login/login.reducer"
-import roleReducer from "./role/role.reducer"
+import { persistReducer } from "redux-persist"
 import registerReducer from "./register/register.reducer"
+import roleReducer from "./role/role.reducer"
+import storage from "redux-persist/lib/storage"
 
 const persistConfig = {
 	key: "root",
 	storage,
-	whiteList: [''],
+	whitelist: ["authState"],
 }
 
-const rootReducer = combineReducers({
-	todoState: todoReducer,
+const appReducer = combineReducers({
 	authState: loginReducer,
 	roleState: roleReducer,
-	registerReducer: registerReducer
+	registerReducer: registerReducer,
 })
+const rootReducer = (state: any, action: any) => {
+	// when a logout action is dispatched it will reset redux state
+	if (action.type === "LOG_OUT") {
+		state = undefined
+		storage.removeItem("persist:root")
+	}
+
+	return appReducer(state, action)
+}
 
 export default persistReducer(persistConfig, rootReducer)
-/*
- * File: root-reducer.ts
- * File Created: Sunday, 27th December 2020 10:50:06 am
- * -----
- * Last Modified: Sunday, 27th December 2020 10:54:18 am
- * -----
- * Description
- */
-
-
-
-
-
