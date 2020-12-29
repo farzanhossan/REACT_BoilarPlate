@@ -1,0 +1,4 @@
+export const RegisterTypes = {
+	REGISTER_SUCCESS: "REGISTER_SUCCESS",
+	REGISTER_FAILED: "REGISTER_FAILED",
+}

@@ -1,16 +1,26 @@
-import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom"
+/*
+ * File: App.tsx
+ * File Created: Sunday, 27th December 2020 10:50:06 am
+ * -----
+ * Last Modified: Sunday, 27th December 2020 6:08:05 pm
+ * -----
+ * Description
+ */
 
 import React from "react"
-import Todo from "./@pages/todo-page/todo.page.component"
-import User from "./@pages/user-page/user.page.component"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import Auth from "./@components/auth/auth.component"
+import HomePage from "./@components/homePage/homePage.component"
+import Register from "./@components/register/register.component"
+
 
 const App = () => {
 	return (
 		<Router>
-			<Link to="/user">User</Link>
 			<Switch>
-				<Route exact={true} path="/todo" component={Todo} />
-				<Route exact={true} path="/user" component={User} />
+				<Route exact={true} path="/" component={Auth} />
+				<Route exact={true} path="/home" component={HomePage} />
+				<Route exact={true} path="/register" component={Register} />
 			</Switch>
 		</Router>
 	)
