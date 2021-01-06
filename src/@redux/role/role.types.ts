@@ -1,4 +1,0 @@
-export const RoleTypes = {
-	ROLE_GET_SUCCESS: "ROLE_GET_SUCCESS",
-	ROLE_GET_FAILED: "ROLE_GET_FAILED",
-}
